@@ -39,6 +39,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   mode: "hash",
+  base: process.env.environment === "development" ? "/" : "/ShukatsuPlus/",
 })
 
 export default router
