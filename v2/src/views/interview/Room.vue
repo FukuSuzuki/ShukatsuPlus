@@ -1,15 +1,15 @@
 <!-- src/views/Room.vue -->
 <!-- <template>
-  <div class="p-4">
-    <h1 class="text-xl font-bold">ルームID: {{ roomId }}</h1>
-    <p>ここにルームの情報が表示されます。</p>
-  </div>
+	<div class="p-4">
+		<h1 class="text-xl font-bold">ルームID: {{ roomId }}</h1>
+		<p>ここにルームの情報が表示されます。</p>
+	</div>
 </template> -->
 
 <script setup>
 	import { ref, computed, onMounted, watch, inject } from "vue";
 	import { postGas } from "@/scripts/gas";
-    import { useRoute } from 'vue-router'
+	import { useRoute } from 'vue-router'
 
 	const emit = defineEmits(["changeTitle", "requireGoBack"]);
 	const { state } = inject('auth')
@@ -18,8 +18,8 @@
 	// 	username: { type: String, required: true },
 	// });
 
-    const route = useRoute()
-    const roomId = route.params.roomId
+	const route = useRoute()
+	const roomId = route.params.roomId
 
 	const isLoggedIn = computed(() => !!state.sessionId);
 
@@ -405,18 +405,18 @@
 
 			<!-- チャット履歴 -->
 			<div class="flex-grow overflow-y-auto space-y-2 mb-24">
-                <p
-                v-for="val in chat.contents"
-                :key="val.id"
-                :class="[
-                    'max-w-xs px-4 py-2 rounded-lg shadow text-sm whitespace-pre-wrap break-words text-left',
-                    val.role === 'user'
-                    ? 'ml-auto bg-green-100'
-                    : 'mr-auto bg-white'
-                ]"
-                >
-                {{ chatBody(val) }}
-                </p>
+				<p
+				v-for="val in chat.contents"
+				:key="val.id"
+				:class="[
+					'max-w-xs px-4 py-2 rounded-lg shadow text-sm whitespace-pre-wrap break-words text-left',
+					val.role === 'user'
+					? 'ml-auto bg-green-100'
+					: 'mr-auto bg-white'
+				]"
+				>
+				{{ chatBody(val) }}
+				</p>
 				<p class="text-gray-500 text-sm mt-2">{{ loadingMessage }}</p>
 			</div>
 
@@ -440,4 +440,3 @@
 		</div>
 	</div>
 </template>
-

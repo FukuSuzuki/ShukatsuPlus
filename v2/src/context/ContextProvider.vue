@@ -7,54 +7,54 @@ const route = useRoute()
 const router = useRouter()
 
 const state = reactive({
-  sessionId: null,
-  userId: null,
-  isAuthenticated: false,
+	sessionId: null,
+	userId: null,
+	isAuthenticated: false,
 })
 
 // APIでログイン
 function login(userId, sessionId) {
-    state.userId = userId
-    state.sessionId = sessionId
-    state.isAuthenticated = true
+		state.userId = userId
+		state.sessionId = sessionId
+		state.isAuthenticated = true
 
-    // 永続化
-    localStorage.setItem('sessionId', sessionId)
-    localStorage.setItem('userId', userId)
+		// 永続化
+		localStorage.setItem('sessionId', sessionId)
+		localStorage.setItem('userId', userId)
 }
 
 // ログアウト
 function logout() {
-  state.userId = null
-  state.sessionId = null
-  state.isAuthenticated = false
-  localStorage.removeItem('sessionId')
-  localStorage.removeItem('userId')
+	state.userId = null
+	state.sessionId = null
+	state.isAuthenticated = false
+	localStorage.removeItem('sessionId')
+	localStorage.removeItem('userId')
 }
 
 onMounted(() => {
-  const savedSessionId = localStorage.getItem('sessionId')
-  const savedUserId = localStorage.getItem('userId')
+	const savedSessionId = localStorage.getItem('sessionId')
+	const savedUserId = localStorage.getItem('userId')
 
-  if (savedSessionId && savedUserId) {
-    state.sessionId = savedSessionId
-    state.userId = savedUserId
-    state.isAuthenticated = true
-  }
+	if (savedSessionId && savedUserId) {
+		state.sessionId = savedSessionId
+		state.userId = savedUserId
+		state.isAuthenticated = true
+	}
 
-  // if (route.path === '/' && state?.sessionId) {
-  //   router.replace('/lesson')
-  // }
+	// if (route.path === '/' && state?.sessionId) {
+	//   router.replace('/lesson')
+	// }
 })
 
 provide('auth', {
-  state,
-  login,
-  logout,
+	state,
+	login,
+	logout,
 })
 </script>
 
 <template>
-    <slot v-if="state.isAuthenticated" ></slot>
-    <AccountManager v-else />
+		<slot v-if="state.isAuthenticated" ></slot>
+		<AccountManager v-else />
 </template>
